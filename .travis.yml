@@ -1,0 +1,22 @@
+dist: bionic
+
+language: minimal
+
+cache:
+  directories:
+    # Cache the database so it doesn't need to be imported on every build.
+    - $TRAVIS_BUILD_DIR/.docksal/database
+
+install:
+  - curl -fsSL https://get.docksal.io | bash
+  - fin version
+  - fin sysinfo
+
+before_script:
+  # Initialize the stack so the cli container exists.
+  - fin project reset -f
+  # Install dependencies so PHP_CodeSniffer is present.
+  - fin composer-install
+
+script:
+  - fin test

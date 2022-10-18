@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+
+## Initialize stack and site (full reset)
+##
+## Usage: fin init
+
+# Abort if anything fails
+set -e
+
+#-------------------------- Settings -------------------------------------
+
+OUTPUT_FILE=.docksal/database/seed-database.sql
+
+#-------------------------- END: Settings --------------------------------
+
+#-------------------------- Helper functions --------------------------------
+
+# Console colors
+red='\033[0;31m'
+green='\033[0;32m'
+green_bg='\033[1;97;42m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+echo-red () { echo -e "${red}$1${NC}"; }
+echo-green () { echo -e "${green}$1${NC}"; }
+echo-green-bg () { echo -e "${green_bg}$1${NC}"; }
+echo-yellow () { echo -e "${yellow}$1${NC}"; }
+
+#-------------------------- END: Helper functions ---------------------------
+
+#-------------------------- Execution --------------------------------
+
+# Stack initialization
+echo -e "${green_bg} Step 1 ${NC}${green} Initializing stack...${NC}"
+fin project reset -f
+fin make-cert
+
+# Site initialization
+echo -e "${green_bg} Step 2 ${NC}${green} Initializing site...${NC}"
+
+# Install project dependencies
+fin composer-install
+
+## Commit the generated `composer.lock` file.
+echo-green "Committing the generated composer.lock file."
+git add composer.lock
+git commit --allow-empty --message "Commit generated composer.lock file"
+
+# Generate and commit a default project specific salt to fallback to when a local salt doesn't exist.
+echo-green "Generating and committing a default project specific salt."
+fin drush php-eval 'echo \Drupal\Component\Utility\Crypt::randomBytesBase64(55)' > salts/salt.txt
+git add salts --all
+git commit --allow-empty --message "Default project specific salt to use when no local salt exists"
+
+# Project initialization steps
+fin fix-permissions
+fin init-settings
+fin drush-site-install
+
+## Export Drupal's default configuration
+fin drush config:export
+
+## Commit Drupal's default configuration
+echo-green "Exporting and committing Drupal default configuration."
+git add config --all
+git commit --allow-empty --message "Export Drupal default configuration"
+
+## Export DB
+echo-green "Exporting the project seed database."
+fin db dump $OUTPUT_FILE && gzip $OUTPUT_FILE
+
+echo -e "${green_bg} DONE! ${NC}${green} Completed all project initialization steps.${NC}"
+echo-yellow "Refer to the project README for next steps."
+
+#-------------------------- END: Execution --------------------------------

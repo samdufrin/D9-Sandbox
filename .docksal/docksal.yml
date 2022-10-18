@@ -1,0 +1,11 @@
+version: "2.1"
+
+  # MailHog
+services:
+  cli:
+    environment:
+      - DRUSH_OPTIONS_URI
+  mail:
+    extends:
+      file: ${HOME}/.docksal/stacks/services.yml
+      service: mail

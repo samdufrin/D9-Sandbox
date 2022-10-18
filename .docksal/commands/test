@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+## Test site installation
+##
+## Usage: fin test
+
+# Abort if anything fails
+set -e
+
+# Debug mode switch
+if [[ "${DEBUG}" != "" ]]; then
+    set -x
+fi
+
+echo "Running PHP_CodeSniffer..."
+fin exec vendor/bin/phpcs
+echo "All PHP_CodeSniffer coding standards passed"

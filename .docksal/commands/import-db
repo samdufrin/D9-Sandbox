@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+## Pull the most recent database backup from production.
+##
+## Usage: fin import-db
+
+#-------------------------- Settings -------------------------------------
+
+DB_GDRIVE_FILE_ID=""
+
+#-------------------------- END: Settings --------------------------------
+
+#-------------------------- Execution --------------------------------
+
+# Pull DB from Google Drive using the file ID per
+# https://medium.com/@acpanjan/download-google-drive-files-using-wget-3c2c025a8b99
+echo "Removing .docksal/database/database.sql.gz file if present..."
+if [ -f .docksal/database/database.sql.gz ]; then rm .docksal/database/database.sql.gz; fi
+echo "Fetching database..."
+fin exec wget --no-check-certificate "https://docs.google.com/uc?export=download&id=${DB_GDRIVE_FILE_ID}" -O .docksal/database/database.sql.gz
+gunzip '.docksal/database/database.sql.gz'
+##echo "Dropping database and recreating..."
+fin db drop default
+fin db create default
+echo "Importing database..."
+fin db import '.docksal/database/database.sql'
+gzip '.docksal/database/database.sql'
+echo "Database imported successfully!"
+
+#-------------------------- END: Execution --------------------------------

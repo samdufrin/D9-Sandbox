@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+
+## Initialize stack and site (full reset)
+##
+## Usage: fin init
+
+# Abort if anything fails
+set -e
+
+#-------------------------- Helper functions --------------------------------
+
+# Console colors
+red='\033[0;31m'
+green='\033[0;32m'
+green_bg='\033[1;97;42m'
+yellow='\033[1;33m'
+NC='\033[0m'
+
+echo-red () { echo -e "${red}$1${NC}"; }
+echo-green () { echo -e "${green}$1${NC}"; }
+echo-green-bg () { echo -e "${green_bg}$1${NC}"; }
+echo-yellow () { echo -e "${yellow}$1${NC}"; }
+
+#-------------------------- END: Helper functions ---------------------------
+
+#-------------------------- Functions --------------------------------
+
+# Create docksal-local.env
+create_docksal_local()
+{
+	local source="$1"
+	local dest="$2"
+
+	if [[ ! -f '.docksal/docksal-local.env' ]]; then
+		echo "Createing docksal-local file."
+		touch .docksal/docksal-local.env
+	else
+		echo "docksal-local already in place."
+	fi
+}
+
+#-------------------------- END: Functions --------------------------------
+
+#-------------------------- Execution --------------------------------
+
+# Stack initialization
+echo -e "${green_bg} Step 1 ${NC}${green} Initializing stack...${NC}"
+fin project reset -f
+fin make-cert
+
+# Site initialization
+echo -e "${green_bg} Step 2 ${NC}${green} Initializing site...${NC}"
+# This runs inside cli using http://docs.docksal.io/en/v1.4.0/fin/custom-commands/#executing-commands-inside-cli
+fin composer-install
+fin fix-permissions
+fin init-settings
+create_docksal_local
+echo -e "Open ${yellow}http://${VIRTUAL_HOST}${NC} in your browser to verify the setup."
+echo-yellow "Look for admin login link in the output below."
+
+# Import the database
+echo -e "${green_bg} Step 3${green} Importing the database...${NC}"
+fin import-db
+
+# Prepare the site
+echo -e "${green_bg} Step 4${green} Preparing the site...${NC}"
+fin prep-site
+
+echo -e "${green_bg} DONE! ${NC}${green} Completed all initialization steps.${NC}"
+
+#-------------------------- END: Execution --------------------------------

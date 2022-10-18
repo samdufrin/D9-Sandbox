@@ -1,0 +1,1 @@
+default salt - this should be overridden and committed during initial site setup

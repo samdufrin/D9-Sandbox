@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="drupal-coding-standards">
+  <description>PHP CodeSniffer configuration for Drupal development.</description>
+  <file>web/modules/custom</file>
+  <file>web/themes/custom</file>
+  <arg name="extensions" value="php,module,inc,install,test,profile,theme,css,info,txt,yml"/>
+  <arg name="ignore" value="*/build/css/*,*/node_modules/*"/>
+  <config name="drupal_core_version" value="9"/>
+  <rule ref="vendor/drupal/coder/coder_sniffer/Drupal">
+    <exclude name="Drupal.InfoFiles.AutoAddedKeys"/>
+    <exclude name="Drupal.Commenting.ClassComment.Short"/>
+    <exclude name="Drupal.Arrays.Array.LongLineDeclaration"/>
+  </rule>
+  <rule ref="vendor/drupal/coder/coder_sniffer/DrupalPractice"/>
+</ruleset>
