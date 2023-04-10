@@ -32,3 +32,5 @@
 
 # Ignore MacOS files and directories
 .DS_Store
+
+**/.sass-cache

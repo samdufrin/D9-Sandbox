@@ -1,0 +1,11 @@
+social_api_block:
+  version: 1.x
+  css:
+    theme:
+      css/social_api_block.css: {}
+  js:
+    js/social_api_block.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/jquery.once

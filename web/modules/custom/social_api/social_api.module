@@ -1,0 +1,19 @@
+<?php
+
+
+function social_api_theme($existing, $type, $theme, $path) {
+    return[
+        'facebook_posts' => [
+            'variables' => [
+                'user' => NULL,
+                'posts' => NULL,
+            ]
+        ],
+        'twitter_tweets' => [
+            'variables' => [
+                'user' => NULL,
+                'tweets' => NULL,
+            ]
+        ]
+    ];
+}

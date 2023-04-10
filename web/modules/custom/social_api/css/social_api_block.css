@@ -1,0 +1,110 @@
+/* line 3, ../sass/social_api_block.scss */
+.block-social-api-block .block__content {
+  display: flex;
+  column-gap: 2rem;
+}
+/* line 4, ../sass/social_api_block.scss */
+.block-social-api-block .block__content > div {
+  flex: 1;
+}
+
+/* line 8, ../sass/social_api_block.scss */
+.social-api-post {
+  font-family: "system-ui", sans-serif;
+  position: relative;
+  padding: 1.4rem;
+  border: 1px solid #bdbdbd;
+  border-radius: 0.6rem;
+  margin-top: 1.5rem;
+  background-color: #fff;
+  transition: background-color 0.15s ease;
+}
+/* line 10, ../sass/social_api_block.scss */
+.social-api-post:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+/* line 11, ../sass/social_api_block.scss */
+.social-api-post .logo {
+  position: absolute;
+  top: 0.8rem;
+  right: 0.8rem;
+  width: 25px;
+}
+
+/* line 20, ../sass/social_api_block.scss */
+.facebook-post .metadata img {
+  float: left;
+  width: 50px;
+  border-radius: 50px;
+  margin-right: 0.5rem;
+}
+/* line 21, ../sass/social_api_block.scss */
+.facebook-post .metadata h5 {
+  margin: 0;
+  font-weight: 600;
+}
+/* line 22, ../sass/social_api_block.scss */
+.facebook-post .metadata h6 {
+  margin: 0;
+  color: #65676b;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+/* line 25, ../sass/social_api_block.scss */
+.facebook-post .content a {
+  color: #3578e5;
+  text-decoration: none;
+}
+/* line 26, ../sass/social_api_block.scss */
+.facebook-post .content a:hover {
+  text-decoration: underline;
+}
+/* line 28, ../sass/social_api_block.scss */
+.facebook-post .content img {
+  border-radius: 0.4rem;
+}
+
+/* line 39, ../sass/social_api_block.scss */
+.twitter-tweet .metadata img {
+  float: left;
+  width: 50px;
+  border-radius: 50px;
+  margin-right: 0.5rem;
+}
+/* line 40, ../sass/social_api_block.scss */
+.twitter-tweet .metadata h5 {
+  margin: 0;
+}
+/* line 41, ../sass/social_api_block.scss */
+.twitter-tweet .metadata h6 {
+  color: #536471;
+  margin: 0;
+  font-weight: 400;
+}
+/* line 43, ../sass/social_api_block.scss */
+.twitter-tweet .content {
+  margin-top: 0.8rem;
+}
+/* line 44, ../sass/social_api_block.scss */
+.twitter-tweet .content p {
+  margin: 0;
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+/* line 45, ../sass/social_api_block.scss */
+.twitter-tweet .content p a {
+  color: #1d9bf0;
+  text-decoration: none;
+}
+/* line 46, ../sass/social_api_block.scss */
+.twitter-tweet .content p img {
+  border-radius: 1rem;
+}
+/* line 48, ../sass/social_api_block.scss */
+.twitter-tweet .content span {
+  display: block;
+  font-size: 0.9rem;
+  color: #536471;
+  margin-top: 1rem;
+}

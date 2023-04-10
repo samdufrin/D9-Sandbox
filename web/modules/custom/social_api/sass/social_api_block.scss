@@ -1,0 +1,50 @@
+// General block styling
+.block-social-api-block{
+    .block__content{ display:flex; column-gap:2rem;
+        & > div{ flex:1; }
+    }
+}
+
+.social-api-post{ font-family:"system-ui", sans-serif; position:relative; padding:1.4rem; border:1px solid #bdbdbd; border-radius:0.6rem;
+    margin-top:1.5rem; background-color:#fff; transition:background-color 0.15s ease;
+    &:hover{ cursor:pointer; background-color:#eee; }
+    .logo{ position:absolute; top:0.8rem; right:0.8rem; width:25px; }
+}
+
+//Styling for Facebook API
+$facebook-blue: #3578e5;
+$facebook-gray: #65676b;
+
+.facebook-post{
+    .metadata{
+        img{ float:left; width:50px; border-radius:50px; margin-right:0.5rem;}
+        h5{ margin:0; font-weight:600; }
+        h6{ margin:0; color:$facebook-gray; font-size:0.8rem; font-weight:400; }
+    }
+    .content{
+        a{ color:$facebook-blue; text-decoration:none;
+            &:hover{ text-decoration:underline }
+        }
+        img{ border-radius:0.4rem; }
+    }
+}
+
+
+// Styling for Twitter API
+$twitter-blue: #1d9bf0;
+$twitter-gray: #536471;
+
+.twitter-tweet{
+    .metadata{
+        img{ float:left; width:50px; border-radius:50px; margin-right:0.5rem }
+        h5{ margin:0; }
+        h6{ color:$twitter-gray; margin:0; font-weight:400 }
+    }
+    .content{ margin-top:0.8rem;
+        p{ margin:0; font-weight:400; font-size:1.2rem;
+            a{ color:$twitter-blue; text-decoration:none; }
+            img{ border-radius:1rem; }
+        }
+        span{ display:block; font-size:0.9rem; color:$twitter-gray; margin-top:1rem; }
+    }
+}

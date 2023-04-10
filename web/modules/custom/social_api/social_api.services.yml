@@ -1,0 +1,5 @@
+services:
+  plugin.manager.social_api:
+    class: 'Drupal\social_api\SocialApiManager'
+    parent: default_plugin_manager
+

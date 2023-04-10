@@ -1,0 +1,23 @@
+social_api.settings:
+  path: '/admin/social-api/settings'
+  defaults:
+    _title: 'Social API Settings'
+    _form: '\Drupal\social_api\Form\SocialApiSettingsForm'
+  requirements:
+    _role: 'administrator'
+  options:
+    _admin_route: true
+
+social_api.facebook.login:
+  path: '/social-api/facebook/login'
+  defaults:
+    _controller: '\Drupal\social_api\Controller\FacebookLogin::login'
+  requirements:
+    _role: 'administrator'
+
+social_api.linkedin.login:
+  path: '/social-api/linkedin/login'
+  defaults:
+    _controller: '\Drupal\social_api\Controller\LinkedinLogin::login'
+  requirements:
+    _role: 'administrator'

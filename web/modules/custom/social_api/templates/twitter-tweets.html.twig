@@ -1,0 +1,21 @@
+{{ attach_library('social_api/social_api_block') }}
+
+<div class="twitter-api">
+    <h2>Twitter Feed</h2>
+    {% for tweet in tweets %}
+        <section class="social-api-post twitter-tweet">
+            <a class="tweet-link" href="https://twitter.com/twitter/status/{{ tweet.id }}" target="_blank">
+                <img class="logo" src="modules/custom/social_api/icons/twitter.svg" alt="Twitter logo">
+            </a>
+            <div class="metadata">
+                <img src="{{ user.profile_image_url }}">
+                <h5>{{ user.name }}</h5>
+                <h6>@{{ user.username }}</h6>
+            </div>
+            <div class="content">
+                <p>{{ tweet.text|raw }}</p>
+                <span>{{ tweet.created_at|date("g:i A \· F j\, Y", user.timezone) }}</span>
+            </div>
+        </section>
+    {% endfor %}
+</div>

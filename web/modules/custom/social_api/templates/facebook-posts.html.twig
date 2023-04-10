@@ -1,0 +1,21 @@
+{{ attach_library('social_api/social_api_block') }}
+
+<div class="facebook-api">
+    <h2>Facebook Feed</h2>
+    {% for post in posts %}
+        <section class="social-api-post facebook-post">
+            <a class="fb-post-link" href="{{ post.permalink_url }}" target="_blank">
+                <img class="logo" src="modules/custom/social_api/icons/facebook.svg" alt="Facebook logo">
+            </a>
+            <div class="metadata">
+                <img src="{{ user.picture }}">
+                <h5>{{ user.name }}</h5>
+                <h6>{{ post.created_time|date("F j\, Y \- g:i A", user.timezone) }}</h6>
+            </div>
+            <div class="content">
+                <p>{{ post.message|raw }}</p>
+                <img src="{{ post.full_picture }}">
+            </div>
+        </section>
+    {% endfor %}
+</div>
